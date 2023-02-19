@@ -19,6 +19,8 @@ class DetailPage extends StatelessWidget {
     return Scaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context: context),
+      floatingActionButton: _buildAddToCartButton(context: context),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -58,17 +60,12 @@ class DetailPage extends StatelessWidget {
   }
 
   Widget _buildBody({required BuildContext context}) {
-    return Container(
+    return ListView(
       padding: EdgeInsets.symmetric(horizontal: 24.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildProductImage(),
-          _buildProductCredential(),
-          const Spacer(),
-          _buildAddToCartButton(context: context),
-        ],
-      ),
+      children: [
+        _buildProductImage(),
+        _buildProductCredential(),
+      ],
     );
   }
 
@@ -193,15 +190,13 @@ class DetailPage extends StatelessWidget {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
     return GestureDetector(
       onTap: () {
-        showCustomSnackbar(context, 'produk ditambahkan kedalam Cart');
+        showCustomSnackbar(context, '${product.name} ditambahkan kedalam Cart');
 
         cartProvider.addProduct(product);
       },
       child: Container(
         height: 50.h,
-        margin: EdgeInsets.only(
-          bottom: 60.h,
-        ),
+        margin: EdgeInsets.symmetric(horizontal: 24.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6.r),
           color: Colors.orangeAccent,

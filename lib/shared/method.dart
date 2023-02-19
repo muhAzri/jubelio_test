@@ -16,6 +16,5 @@ void showCustomSnackbar(BuildContext context, String message) {
     message: message,
     flushbarPosition: FlushbarPosition.BOTTOM,
     backgroundColor: grayColor,
-    duration: const Duration(seconds: 3),
   ).show(context);
 }
